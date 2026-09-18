@@ -21,24 +21,64 @@ $featured = $stmt->fetch();
 include 'includes/header.php';
 ?>
 
-<?php if ($featured): ?>
-<section class="hero" <?php if (!empty($featured['poster_path']) && file_exists(__DIR__ . '/' . $featured['poster_path'])): ?>style="background-image: linear-gradient(0deg, rgba(13,13,18,1) 5%, rgba(13,13,18,0.55) 55%, rgba(13,13,18,0.15) 100%), url('<?= htmlspecialchars($featured['poster_path']) ?>'); background-size: cover; background-position: center 20%;"<?php endif; ?>>
+<?php if ($featured): ?> 
+
+<section class="hero" style="background-image: url('assets/uploads/LK-en-20260914-TRIFECTA-perspective_9b318d53-345a-4fcb-b320-e84afbd0ce59_large.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+
+    <div class="hero-overlay"></div>
+
     <div class="hero-content">
-        <div class="hero-eyebrow">FEATURED THIS WEEK</div>
-        <h1><?= htmlspecialchars($featured['title']) ?></h1>
+
+        <div class="hero-eyebrow">
+            FEATURED THIS WEEK
+        </div>
+
+        <h1>
+            <?= htmlspecialchars($featured['title']) ?>
+        </h1>
+
         <div class="hero-meta">
-            <span>&#9733; <?= htmlspecialchars($featured['imdb_rate']) ?> IMDB</span>
-            <span><?= htmlspecialchars($featured['genre']) ?></span>
-            <span><?= (int)$featured['duration'] ?> min</span>
-            <span><?= htmlspecialchars($featured['language']) ?></span>
+
+            <span>
+                &#9733; <?= htmlspecialchars($featured['imdb_rate']) ?> IMDB
+            </span>
+
+            <span>
+                <?= htmlspecialchars($featured['genre']) ?>
+            </span>
+
+            <span>
+                <?= (int)$featured['duration'] ?> min
+            </span>
+
+            <span>
+                <?= htmlspecialchars($featured['language']) ?>
+            </span>
+
         </div>
-        <p><?= htmlspecialchars($featured['description']) ?></p>
+
+        <p>
+            <?= htmlspecialchars($featured['description']) ?>
+        </p>
+
         <div class="hero-actions mt-24">
-            <a href="movie_details.php?id=<?= $featured['movie_id'] ?>" class="btn btn-primary">Book Tickets</a>
-            <a href="movie_details.php?id=<?= $featured['movie_id'] ?>" class="btn btn-ghost">More Details</a>
+
+            <a href="movie_details.php?id=<?= $featured['movie_id'] ?>"
+               class="btn btn-primary">
+                Book Tickets
+            </a>
+
+            <a href="movie_details.php?id=<?= $featured['movie_id'] ?>"
+               class="btn btn-ghost">
+                More Details
+            </a>
+
         </div>
+
     </div>
+
 </section>
+
 <?php endif; ?>
 
 <section class="section">
