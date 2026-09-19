@@ -41,5 +41,5 @@ Plain HTML / CSS / PHP / MySQL cinema booking system (no frameworks).
 ## Notes
 
 - Payment is a dummy gateway — no real card processing, safe for a student project/demo.
-- Pricing is a simple flat rule (Standard vs VIP) set in `seat_selection.php` and `hold_seats.php` — adjust the two constants there if you want per-branch or per-showtime pricing later.
+- Pricing is a simple flat rule (Standard vs Box) set in `seat_selection.php` and `hold_seats.php` — adjust the two constants there if you want per-branch or per-showtime pricing later.
 - This schema and all functionality maps directly onto the submitted ER diagram — no entities, attributes, or relationships were added beyond what was already approved (see project chat history for the specific reasoning on QR-per-booking and the `role` field on `user`).

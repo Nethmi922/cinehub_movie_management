@@ -52,7 +52,7 @@ CREATE TABLE seat (
     hall_id INT NOT NULL,
     seat_number VARCHAR(10) NOT NULL,
     row_label VARCHAR(5) NOT NULL,
-    category ENUM('VIP','Standard') NOT NULL DEFAULT 'Standard',
+    category ENUM('Box','Standard') NOT NULL DEFAULT 'Standard',
     FOREIGN KEY (hall_id) REFERENCES hall(hall_id) ON DELETE CASCADE,
     UNIQUE KEY uniq_seat_per_hall (hall_id, seat_number)
 );
@@ -227,23 +227,23 @@ INSERT INTO hall (branch_id, name, location, capacity, type) VALUES
 (1, 'Hall 2 - IMAX', '1st Floor', 60, 'IMAX'),
 (2, 'Hall 1', 'Ground Floor', 35, '2D');
 
--- Seats for Hall 1 (4 rows A-D, 10 seats each = 40 seats, row D = VIP)
+-- Seats for Hall 1 (4 rows A-D, 10 seats each = 40 seats, row D = Box)
 INSERT INTO seat (hall_id, seat_number, row_label, category)
-SELECT 1, CONCAT(r.row_label, n.num), r.row_label, IF(r.row_label='D','VIP','Standard')
+SELECT 1, CONCAT(r.row_label, n.num), r.row_label, IF(r.row_label='D','Box','Standard')
 FROM (SELECT 'A' AS row_label UNION SELECT 'B' UNION SELECT 'C' UNION SELECT 'D') r
 CROSS JOIN (SELECT 1 num UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5
             UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) n;
 
--- Seats for Hall 2 - IMAX (6 rows A-F, 10 seats each = 60 seats, row F = VIP)
+-- Seats for Hall 2 - IMAX (6 rows A-F, 10 seats each = 60 seats, row F = Box)
 INSERT INTO seat (hall_id, seat_number, row_label, category)
-SELECT 2, CONCAT(r.row_label, n.num), r.row_label, IF(r.row_label='F','VIP','Standard')
+SELECT 2, CONCAT(r.row_label, n.num), r.row_label, IF(r.row_label='F','Box','Standard')
 FROM (SELECT 'A' AS row_label UNION SELECT 'B' UNION SELECT 'C' UNION SELECT 'D' UNION SELECT 'E' UNION SELECT 'F') r
 CROSS JOIN (SELECT 1 num UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5
             UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) n;
 
--- Seats for Hall 1 @ Branch 2 (Galle Road) (5 rows A-E, 7 seats each = 35 seats, row E = VIP)
+-- Seats for Hall 1 @ Branch 2 (Galle Road) (5 rows A-E, 7 seats each = 35 seats, row E = Box)
 INSERT INTO seat (hall_id, seat_number, row_label, category)
-SELECT 3, CONCAT(r.row_label, n.num), r.row_label, IF(r.row_label='E','VIP','Standard')
+SELECT 3, CONCAT(r.row_label, n.num), r.row_label, IF(r.row_label='E','Box','Standard')
 FROM (SELECT 'A' AS row_label UNION SELECT 'B' UNION SELECT 'C' UNION SELECT 'D' UNION SELECT 'E') r
 CROSS JOIN (SELECT 1 num UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5
             UNION SELECT 6 UNION SELECT 7) n;

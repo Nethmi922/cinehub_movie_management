@@ -1,7 +1,7 @@
 /* =========================================================
    CineHub — Design System
    Palette: near-black theatre background, warm off-white text,
-   marquee red for action, muted gold for premium/VIP accents.
+    marquee red for action, muted gold for premium/Box seat accents.
    Fonts are self-hosted (assets/fonts) so the UI renders
    correctly with zero internet access — safe for offline demos.
    ========================================================= */
@@ -458,7 +458,7 @@ input:focus, select:focus, textarea:focus {
     cursor: pointer;
     transition: all 0.12s ease;
 }
-.seat.vip { border-color: var(--gold); color: var(--gold); }
+.seat.box { border-color: var(--gold); color: var(--gold); }
 .seat:hover:not(.booked) { transform: translateY(-2px); border-color: var(--text); }
 .seat.selected { background: var(--red); border-color: var(--red); color: #fff; }
 .seat.booked { background: #26262f; color: #55555f; cursor: not-allowed; border-color: #26262f; }
@@ -965,7 +965,7 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 60px;
 /* =========================================================
    CineHub — Design System
    Palette: near-black theatre background, warm off-white text,
-   marquee red for action, muted gold for premium/VIP accents.
+    marquee red for action, muted gold for premium/Box seat accents.
    Fonts are self-hosted (assets/fonts) so the UI renders
    correctly with zero internet access — safe for offline demos.
    ========================================================= */
@@ -1367,7 +1367,7 @@ input:focus, select:focus, textarea:focus {
     cursor: pointer;
     transition: all 0.12s ease;
 }
-.seat.vip { border-color: var(--gold); color: var(--gold); }
+.seat.box { border-color: var(--gold); color: var(--gold); }
 .seat:hover:not(.booked) { transform: translateY(-2px); border-color: var(--text); }
 .seat.selected { background: var(--red); border-color: var(--red); color: #fff; }
 .seat.booked { background: #26262f; color: #55555f; cursor: not-allowed; border-color: #26262f; }

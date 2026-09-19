@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
 $userId = $_SESSION['user_id'];
 
 $standardPrice = 1200.00;
-$vipPrice = 1800.00;
+$boxPrice = 1800.00;
 
 try {
     $pdo->beginTransaction();
@@ -56,7 +56,7 @@ try {
         if ($r['status'] !== 'Available') {
             throw new Exception('SEATS_TAKEN');
         }
-        $total += ($r['category'] === 'VIP') ? $vipPrice : $standardPrice;
+        $total += ($r['category'] === 'Box') ? $boxPrice : $standardPrice;
     }
 
     // Create the booking (Pending until payment succeeds)

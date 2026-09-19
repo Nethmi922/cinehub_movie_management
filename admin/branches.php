@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_hall'])) {
     $type = trim($_POST['type'] ?? '2D');
     $rows = max(1, (int)($_POST['rows'] ?? 5));
     $seatsPerRow = max(1, (int)($_POST['seats_per_row'] ?? 10));
-    $vipRows = max(0, (int)($_POST['vip_rows'] ?? 1)); // last N rows are VIP
+    $boxRows = max(0, (int)($_POST['box_rows'] ?? 1)); // last N rows are Box seats
 
     if ($hallName === '' || $branchId <= 0) {
         $error = 'Please select a branch and enter a hall name.';
@@ -44,9 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_hall'])) {
         $stmt = $pdo->prepare("INSERT INTO seat (hall_id, seat_number, row_label, category) VALUES (?,?,?,?)");
         for ($r = 0; $r < $rows; $r++) {
             $rowLabel = $rowLetters[$r];
-            $isVip = $r >= ($rows - $vipRows);
+            $isBox = $r >= ($rows - $boxRows);
             for ($n = 1; $n <= $seatsPerRow; $n++) {
-                $stmt->execute([$hallId, $rowLabel . $n, $rowLabel, $isVip ? 'VIP' : 'Standard']);
+                $stmt->execute([$hallId, $rowLabel . $n, $rowLabel, $isBox ? 'Box' : 'Standard']);
             }
         }
         $pdo->commit();
@@ -108,7 +108,7 @@ include 'admin_header.php';
             <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
                 <div class="form-group"><label>Rows</label><input type="number" name="rows" value="6" min="1"></div>
                 <div class="form-group"><label>Seats/row</label><input type="number" name="seats_per_row" value="10" min="1"></div>
-                <div class="form-group"><label>VIP rows (last N)</label><input type="number" name="vip_rows" value="1" min="0"></div>
+                <div class="form-group"><label>Box rows (last N)</label><input type="number" name="box_rows" value="1" min="0"></div>
             </div>
             <button type="submit" name="add_hall" class="btn btn-primary">Add Hall</button>
         </form>

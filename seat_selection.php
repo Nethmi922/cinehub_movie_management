@@ -44,9 +44,9 @@ foreach ($seats as $s) {
 }
 ksort($rows);
 
-// Pricing: simple flat rule, VIP costs more (adjust as needed)
+// Pricing: simple flat rule, Box seats cost more (adjust as needed)
 $standardPrice = 1200.00;
-$vipPrice = 1800.00;
+$boxPrice = 1800.00;
 
 include 'includes/header.php';
 ?>
@@ -76,13 +76,13 @@ include 'includes/header.php';
                         <?php
                             $isBooked = in_array($seat['status'], ['Booked', 'Hold', 'CheckedIn']);
                             $classes = 'seat';
-                            if ($seat['category'] === 'VIP') $classes .= ' vip';
+                            if ($seat['category'] === 'Box') $classes .= ' box';
                             if ($isBooked) $classes .= ' booked';
                         ?>
                         <div class="<?= $classes ?>"
                              data-id="<?= $seat['showtime_seat_id'] ?>"
                              data-seat="<?= htmlspecialchars($seat['seat_number']) ?>"
-                             data-price="<?= $seat['category'] === 'VIP' ? $vipPrice : $standardPrice ?>"
+                             data-price="<?= $seat['category'] === 'Box' ? $boxPrice : $standardPrice ?>"
                              <?= $isBooked ? '' : 'onclick="toggleSeat(this)"' ?>>
                             <?= htmlspecialchars($seat['seat_number']) ?>
                         </div>
@@ -93,7 +93,7 @@ include 'includes/header.php';
 
         <div class="seat-legend">
             <span><span class="legend-box" style="background:var(--bg-raised); border:1px solid var(--border);"></span> Standard (LKR <?= number_format($standardPrice, 0) ?>)</span>
-            <span><span class="legend-box" style="background:var(--bg-raised); border:1px solid var(--gold);"></span> VIP (LKR <?= number_format($vipPrice, 0) ?>)</span>
+            <span><span class="legend-box" style="background:var(--bg-raised); border:1px solid var(--gold);"></span> Box (LKR <?= number_format($boxPrice, 0) ?>)</span>
             <span><span class="legend-box" style="background:var(--red);"></span> Selected</span>
             <span><span class="legend-box" style="background:#26262f;"></span> Unavailable</span>
         </div>
