@@ -23,7 +23,7 @@ include 'includes/header.php';
 
 <?php if ($featured): ?> 
 
-<section class="hero" style="background-image: url('assets/uploads/LK-en-20260914-TRIFECTA-perspective_9b318d53-345a-4fcb-b320-e84afbd0ce59_large.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+<section class="hero">
 
     <div class="hero-overlay"></div>
 
