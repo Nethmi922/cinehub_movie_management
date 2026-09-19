@@ -10,6 +10,13 @@ if (!isset($_SESSION['user_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
 $userId = $_SESSION['user_id'];
 $bookingId = (int)($_POST['booking_id'] ?? 0);
 $method = $_POST['method'] ?? 'Card';
+$cardNumber = trim($_POST['card_number'] ?? '');
+
+if ($method === 'Card' && $cardNumber === '') {
+    $_SESSION['seat_error'] = 'Please enter your credit or debit card number.';
+    header('Location: checkout.php?booking_id=' . $bookingId);
+    exit;
+}
 
 $stmt = $pdo->prepare("SELECT * FROM booking WHERE booking_id = ? AND user_id = ?");
 $stmt->execute([$bookingId, $userId]);

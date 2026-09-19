@@ -85,6 +85,10 @@ include 'includes/header.php';
         </div>
 
         <?php if ($error): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
+        <?php if (!empty($_SESSION['seat_error'])): ?>
+            <div class="alert alert-error"><?= htmlspecialchars($_SESSION['seat_error']) ?></div>
+            <?php unset($_SESSION['seat_error']); ?>
+        <?php endif; ?>
 
         <div class="card mb-24">
             <h3 class="mb-16">Have an offer code?</h3>
@@ -120,11 +124,24 @@ include 'includes/header.php';
                 </div>
                 <div class="form-group">
                     <label for="card_number">Card number (demo only, not stored)</label>
-                    <input type="text" id="card_number" placeholder="4242 4242 4242 4242" maxlength="19">
+                    <input type="text" id="card_number" name="card_number" placeholder="4242 4242 4242 4242" maxlength="19" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Pay LKR <?= number_format($finalTotal, 2) ?></button>
             </form>
         </div>
     </div>
 </section>
+<script>
+const paymentMethod = document.getElementById('method');
+const cardNumber = document.getElementById('card_number');
+
+function updateCardRequirement() {
+    const cardSelected = paymentMethod.value === 'Card';
+    cardNumber.required = cardSelected;
+    cardNumber.disabled = !cardSelected;
+}
+
+paymentMethod.addEventListener('change', updateCardRequirement);
+updateCardRequirement();
+</script>
 <?php include 'includes/footer.php'; ?>
