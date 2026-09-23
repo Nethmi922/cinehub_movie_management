@@ -23,9 +23,7 @@ include 'includes/header.php';
 
 <?php if ($featured): ?> 
 
-<section class="hero">
-
-    <div class="hero-overlay"></div>
+<section class="hero"  <?php if (!empty($featured['poster_path']) && file_exists(__DIR__ . '/' . $featured['poster_path'])): ?>style="background-image: linear-gradient(0deg, rgba(13,13,18,1) 5%, rgba(13,13,18,0.55) 55%, rgba(13,13,18,0.15) 100%), url('<?= htmlspecialchars($featured['poster_path']) ?>'); background-size: cover; background-position: center 20%;"<?php endif; ?>>
 
     <div class="hero-content">
 
