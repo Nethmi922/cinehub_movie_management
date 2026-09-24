@@ -51,6 +51,7 @@ $userRole = $_SESSION['role'] ?? null;
 
         <div class="nav-actions">
             <?php if ($isLoggedIn): ?>
+                <a href="<?= $basePath ?? '' ?>my_bookings.php" class="btn btn-ghost btn-sm">My Bookings</a>
                 <?php if ($userRole === 'admin'): ?>
                 <a href="<?= $basePath ?? '' ?>admin/dashboard.php" class="btn btn-ghost btn-sm">Admin Panel</a>
                 <?php elseif ($userRole === 'counter_staff'): ?>
