@@ -18,12 +18,22 @@ $movies = $stmt->fetchAll();
 $stmt = $pdo->query("SELECT * FROM movie ORDER BY imdb_rate DESC LIMIT 1");
 $featured = $stmt->fetch();
 
+$featuredImage = null;
+
+if ($featured && !empty($featured['poster_path'])) {
+    $posterName = basename($featured['poster_path']);
+
+    if (is_file(__DIR__ . '/assets/uploads/' . $posterName)) {
+        $featuredImage = 'assets/uploads/' . rawurlencode($posterName);
+    }
+}
+
 include 'includes/header.php';
 ?>
 
 <?php if ($featured): ?> 
 
-<section class="hero">
+<section class="hero"<?php if ($featuredImage): ?> style="background-image: url('<?= htmlspecialchars($featuredImage, ENT_QUOTES, 'UTF-8') ?>');"<?php endif; ?>>
 
     <div class="hero-overlay"></div>
 
